@@ -1,0 +1,46 @@
+.head {
+    background-color: #68a93e;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+.logo_text{
+    
+}
+.navigation {
+    gap: 25px;
+    display: flex;
+}
+.navigation a{
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+}
+.hemburgur {
+    display: none;
+}
+.hemburgur i {
+    font-size: 50px;
+    color: #ffffff;
+}
+.active.hemburgur{
+    display: flex;
+    flex-direction: column;
+    background-color: #c2c2c2;
+    padding: 10px 8px;
+}
+@media ((min-width: 300px) and (max-width: 767px)){
+ .hemburgur {
+    display: block;
+ }
+ .navigation {
+    display: none;
+ }
+}
