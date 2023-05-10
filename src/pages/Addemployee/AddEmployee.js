@@ -31,12 +31,9 @@ const AddEmployee = () => {
     }
   const navigate = useNavigate();
 
-
-
     const handleChange = (e) => {
         const employeeData = { ...empData, [e.target.name]: e.target.value };
         setEmpData(employeeData);
-
     }
 
     const submit = () => {
@@ -46,7 +43,6 @@ const AddEmployee = () => {
         setEmpError(errorData);
          
        if( Object.keys(errorData).length > 0 ) return;
-        // window.localStorage.setItem("empData",JSON.stringify(empData));
         axios.post('http://65.2.132.88:7070/admin/emp/add',empData, {
             headers:{
                 Authorization: `Bearer ${token}`
@@ -148,10 +144,8 @@ const AddEmployee = () => {
     }
 
     const reset = () => {
-        setEmpData(initialState);
-        
+        setEmpData(initialState); 
     }
-
     return (
         <div>
             <div className='container'>
@@ -286,13 +280,11 @@ const AddEmployee = () => {
                         {empError.role && <span>{empError.role}</span>}
                     </div>
                 </div>
-
                 <div className='button_group'>
                     <button onClick={submit}>Submit</button>
                     <button onClick={reset}>Reset</button>
                 </div>
             </div>
-            {/* <div>{window.localStorage.getItem('empData')}</div> */}
         </div>
     )
 }
