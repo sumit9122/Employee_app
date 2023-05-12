@@ -24,7 +24,7 @@ const Login = () => {
         if(Object.keys(userError).length > 0) return;
 
         postAPIData("/login", loginData).then(res => {
-            console.log("res", res.data);
+        
             window.localStorage.setItem("token", res.data.token);
             setTimeout(() => {
                 navigate('/')
