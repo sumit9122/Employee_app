@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './Login.css'
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { postAPIData } from '../../utils/Index';
 
 const Login = () => {
-
-
-
     const [loginData, setLoginData] = useState({});
     const [loginError, setLoginError] = useState('');
     const navigate = useNavigate();
-
     useEffect(() => {
         let token = window.localStorage.token;
         if (token) {
@@ -22,14 +18,13 @@ const Login = () => {
         const setData = { ...loginData, [e.target.name]: e.target.value }
         setLoginData(setData);
     }
-
     const signUp = () => {
         const userError = validate(loginData);
         setLoginError(userError);
         if(Object.keys(userError).length > 0) return;
 
-        axios.post('http://65.2.132.88:7070/admin/login', loginData).then(res => {
-            // console.log("res", res.data);
+        postAPIData("/login", loginData).then(res => {
+            console.log("res", res.data);
             window.localStorage.setItem("token", res.data.token);
             setTimeout(() => {
                 navigate('/')
@@ -39,8 +34,6 @@ const Login = () => {
             console.log(error);
         })
     }
-
-
     const validate = (val) => {
         const errors = {};
         if (!val?.username) {
@@ -63,13 +56,10 @@ const Login = () => {
                         <input type='password' name='password' onChange={handleChange} value={loginData.password} placeholder='Enter Your password' />
                         {loginError.password && <span>{loginError.password}</span>}
                         <button onClick={signUp}>Login</button>
-
                     </div>
                 </div>
-
             </div>
         </div>
     )
 }
-
 export default Login

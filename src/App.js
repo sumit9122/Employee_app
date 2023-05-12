@@ -7,17 +7,11 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-
-
 function App() {
-
   const PrivateRoute = ({ children }) => {
   const token = window.localStorage.getItem("token");
-
     return token ? <><Header /> {children}</>  : <Navigate to="/login" />
   }
-
-
   return (
     <div className="App">
       <Router>
@@ -28,10 +22,7 @@ function App() {
           <Route path='/addEmployee' element={<PrivateRoute><AddEmployee /></PrivateRoute>} />
         </Routes>
       </Router>
-
-
     </div>
   );
 }
-
 export default App;

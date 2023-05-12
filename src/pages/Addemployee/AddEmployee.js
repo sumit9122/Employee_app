@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './AddEmployee.css'
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { postAPIData } from '../../utils/Index';
 
 const AddEmployee = () => {
     const [empData, setEmpData] = useState({});
@@ -29,25 +29,19 @@ const AddEmployee = () => {
         designation:"",
         role:""
     }
+let token = window.localStorage.getItem("token");
   const navigate = useNavigate();
 
     const handleChange = (e) => {
         const employeeData = { ...empData, [e.target.name]: e.target.value };
         setEmpData(employeeData);
     }
-
     const submit = () => {
-       let token = window.localStorage.getItem("token");
-        console.log("empData", empData)
         let errorData = validate(empData)
         setEmpError(errorData);
          
        if( Object.keys(errorData).length > 0 ) return;
-        axios.post('http://65.2.132.88:7070/admin/emp/add',empData, {
-            headers:{
-                Authorization: `Bearer ${token}`
-            }
-        }).then(res => {
+        postAPIData("/emp/add", empData, token).then(res => {
             console.log("res", res.data);
              setTimeout(()=> {
               navigate(-1);
@@ -56,7 +50,6 @@ const AddEmployee = () => {
             console.log(err);
         })
     }
-
     const validate = (val) => {
         const no_pattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
         const email_pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -137,12 +130,9 @@ const AddEmployee = () => {
         if(!val?.role){
             errors.role="role is required";
         }
-        
         console.log("errors",errors)
-
         return errors;
     }
-
     const reset = () => {
         setEmpData(initialState); 
     }

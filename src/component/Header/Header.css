@@ -11,12 +11,10 @@ a{
     text-decoration: none;
     color: inherit;
 }
-.logo_text{
-    
-}
 .navigation {
     gap: 25px;
     display: flex;
+    align-items: center;
 }
 .navigation a{
     font-size: 18px;
@@ -35,6 +33,22 @@ a{
     flex-direction: column;
     background-color: #c2c2c2;
     padding: 10px 8px;
+}
+.log_button {
+    padding: 10px 16px;
+    font-size: 17px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: #ffffff;
+    color:#68a93e;
+    border: 1px solid transparent;
+}
+.log_button:hover{
+    border: 1px solid #fff;
+    background-color: #68a93e;
+    color: #ffffff;
 }
 @media ((min-width: 300px) and (max-width: 767px)){
  .hemburgur {
