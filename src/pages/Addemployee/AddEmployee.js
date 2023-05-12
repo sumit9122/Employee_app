@@ -42,7 +42,7 @@ let token = window.localStorage.getItem("token");
          
        if( Object.keys(errorData).length > 0 ) return;
         postAPIData("/emp/add", empData, token).then(res => {
-            console.log("res", res.data);
+        
              setTimeout(()=> {
               navigate(-1);
              },1000)
